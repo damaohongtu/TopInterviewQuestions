@@ -1,16 +1,17 @@
 #pragma once
+
 struct BinaryTreeNode
 {
-	int value;
-	BinaryTreeNode *left;
-	BinaryTreeNode *right;
+	int                    m_nValue;
+	BinaryTreeNode*        m_pLeft;
+	BinaryTreeNode*        m_pRight;
 };
-//二叉树的基本操作
-BinaryTreeNode* createBinaryTreeNode(int value);
-void connectTreeNodes(BinaryTreeNode* pParent,BinaryTreeNode* pLeft,BinaryTreeNode* pRight);
-void printTreeNode(const BinaryTreeNode* pNode);
-void printTree(const BinaryTreeNode *pRoot);
-void destroyTree(BinaryTreeNode *pRoot);
 
-//树的广度优先搜索
-void printFromTopToBottom(BinaryTreeNode* pTreeNode);
+__declspec(dllexport) BinaryTreeNode* CreateBinaryTreeNode(int value);
+__declspec(dllexport) void ConnectTreeNodes(BinaryTreeNode* pParent, BinaryTreeNode* pLeft, BinaryTreeNode* pRight);
+__declspec(dllexport) void PrintTreeNode(const BinaryTreeNode* pNode);
+__declspec(dllexport) void PrintTree(const BinaryTreeNode* pRoot);
+__declspec(dllexport) void DestroyTree(BinaryTreeNode* pRoot);
+__declspec(dllexport) void printFromTopToBottom(BinaryTreeNode* pTreeNode);
+__declspec(dllexport) void printFromTopToBottomByLevel(BinaryTreeNode* pTreeNode);
+__declspec(dllexport) void printFromTopToBootomZigzag(BinaryTreeNode* pTreeNode);

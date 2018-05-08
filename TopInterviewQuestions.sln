@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StackWithMin", "StackWithMi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StackEx", "StackEx\StackEx.vcxproj", "{9E8F6104-C815-4B5A-B10D-44E39BA1BB45}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tree", "Tree\Tree.vcxproj", "{A6B02653-8F75-43A8-A443-AF02A16EDF86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{9E8F6104-C815-4B5A-B10D-44E39BA1BB45}.Release|x64.Build.0 = Release|x64
 		{9E8F6104-C815-4B5A-B10D-44E39BA1BB45}.Release|x86.ActiveCfg = Release|Win32
 		{9E8F6104-C815-4B5A-B10D-44E39BA1BB45}.Release|x86.Build.0 = Release|Win32
+		{A6B02653-8F75-43A8-A443-AF02A16EDF86}.Debug|x64.ActiveCfg = Debug|x64
+		{A6B02653-8F75-43A8-A443-AF02A16EDF86}.Debug|x64.Build.0 = Debug|x64
+		{A6B02653-8F75-43A8-A443-AF02A16EDF86}.Debug|x86.ActiveCfg = Debug|Win32
+		{A6B02653-8F75-43A8-A443-AF02A16EDF86}.Debug|x86.Build.0 = Debug|Win32
+		{A6B02653-8F75-43A8-A443-AF02A16EDF86}.Release|x64.ActiveCfg = Release|x64
+		{A6B02653-8F75-43A8-A443-AF02A16EDF86}.Release|x64.Build.0 = Release|x64
+		{A6B02653-8F75-43A8-A443-AF02A16EDF86}.Release|x86.ActiveCfg = Release|Win32
+		{A6B02653-8F75-43A8-A443-AF02A16EDF86}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

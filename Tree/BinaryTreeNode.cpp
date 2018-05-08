@@ -1,21 +1,78 @@
-#include"BinaryTreeNode.h"
+#include "stdafx.h"
+#include <cstdio>
+#include "BinaryTreeNode.h"
 #include<deque>
-#include<iostream>
-using namespace std;
-BinaryTreeNode* createBinaryTreeNode(int value) {
+#include<stack>
+BinaryTreeNode* CreateBinaryTreeNode(int value)
+{
+	BinaryTreeNode* pNode = new BinaryTreeNode();
+	pNode->m_nValue = value;
+	pNode->m_pLeft = nullptr;
+	pNode->m_pRight = nullptr;
 
+	return pNode;
 }
-void connectTreeNodes(BinaryTreeNode* pParent, BinaryTreeNode* pLeft, BinaryTreeNode* pRight) {
-	
+
+void ConnectTreeNodes(BinaryTreeNode* pParent, BinaryTreeNode* pLeft, BinaryTreeNode* pRight)
+{
+	if (pParent != nullptr)
+	{
+		pParent->m_pLeft = pLeft;
+		pParent->m_pRight = pRight;
+	}
 }
-void printTreeNode(const BinaryTreeNode* pNode) {
-	
+
+void PrintTreeNode(const BinaryTreeNode* pNode)
+{
+	if (pNode != nullptr)
+	{
+		printf("value of this node is: %d\n", pNode->m_nValue);
+
+		if (pNode->m_pLeft != nullptr)
+			printf("value of its left child is: %d.\n", pNode->m_pLeft->m_nValue);
+		else
+			printf("left child is nullptr.\n");
+
+		if (pNode->m_pRight != nullptr)
+			printf("value of its right child is: %d.\n", pNode->m_pRight->m_nValue);
+		else
+			printf("right child is nullptr.\n");
+	}
+	else
+	{
+		printf("this node is nullptr.\n");
+	}
+
+	printf("\n");
 }
-void printTree(const BinaryTreeNode *pRoot) {
-	
+
+void PrintTree(const BinaryTreeNode* pRoot)
+{
+	PrintTreeNode(pRoot);
+
+	if (pRoot != nullptr)
+	{
+		if (pRoot->m_pLeft != nullptr)
+			PrintTree(pRoot->m_pLeft);
+
+		if (pRoot->m_pRight != nullptr)
+			PrintTree(pRoot->m_pRight);
+	}
 }
-void destroyTree(BinaryTreeNode *pRoot) {
-	
+
+void DestroyTree(BinaryTreeNode* pRoot)
+{
+	if (pRoot != nullptr)
+	{
+		BinaryTreeNode* pLeft = pRoot->m_pLeft;
+		BinaryTreeNode* pRight = pRoot->m_pRight;
+
+		delete pRoot;
+		pRoot = nullptr;
+
+		DestroyTree(pLeft);
+		DestroyTree(pRight);
+	}
 }
 //树的广度优先算法
 void printFromTopToBottom(BinaryTreeNode* pTreeNode) {
@@ -29,14 +86,97 @@ void printFromTopToBottom(BinaryTreeNode* pTreeNode) {
 	{
 		BinaryTreeNode *pNode = dequeTreeNode.front();
 		dequeTreeNode.pop_front();
-		cout << pNode->value << endl;
-		if (pNode->left)
+		printf("%d ",pNode->m_nValue);
+		if (pNode->m_pLeft)
 		{
-			dequeTreeNode.push_back(pNode->left);
+			dequeTreeNode.push_back(pNode->m_pLeft);
 		}
-		if (pNode->right)
+		if (pNode->m_pRight)
 		{
-			dequeTreeNode.push_back(pNode->right);
+			dequeTreeNode.push_back(pNode->m_pRight);
 		}
 	}
+}
+//树的广度优先遍历算法，按照行来进行打印
+void printFromTopToBottomByLevel(BinaryTreeNode* pTreeNode) {
+	if (pTreeNode==nullptr)
+	{
+		return;
+	}
+	std::deque<BinaryTreeNode *>dequeTreeNode;
+	dequeTreeNode.push_back(pTreeNode);
+	int nextLevel = 0;
+	int toPrint = 1;
+	while (dequeTreeNode.size())
+	{
+		BinaryTreeNode *pNode = dequeTreeNode.front();
+		dequeTreeNode.pop_front();
+		printf("%d ",pNode->m_nValue);
+		toPrint--;
+		if (pNode->m_pLeft)
+		{
+			dequeTreeNode.push_back(pNode->m_pLeft);
+			nextLevel++;
+		}
+		if (pNode->m_pRight)
+		{
+			dequeTreeNode.push_back(pNode->m_pRight);
+			nextLevel++;
+		}
+		if (toPrint==0)
+		{
+			printf("\n");
+			toPrint = nextLevel; 
+			nextLevel = 0;
+		}
+	}
+}
+//树的广度优先遍历算法，按照zigzag行来进行打印
+void printFromTopToBootomZigzag(BinaryTreeNode *pTreeNode) {
+	if (pTreeNode==nullptr) {
+		return;
+	}
+	//定义stack数组，分别用来保存奇数行和偶数行
+	std::stack<BinaryTreeNode *>level[2];
+	int current = 0;//当前正在遍历的行
+	int next = 1;//将要打印的下一行
+	level[current].push(pTreeNode);
+	while (!level[current].empty()||!level[next].empty())
+	{
+		BinaryTreeNode *pNode = level[current].top();
+		level[current].pop();
+		printf("%d ", pNode->m_nValue);
+		if (current==0) {
+			//以下针对于偶数列，压栈的顺序是先左后右，出栈的时候是先右后左
+			if (pNode->m_pLeft) {
+				level[next].push(pNode->m_pLeft);
+			}
+			if (pNode->m_pRight) {
+				level[next].push(pNode->m_pRight);
+			}
+		}
+		if (current==1)
+		{
+			//以下针对奇数行，压栈先右后左，出栈先左后右
+			if (pNode->m_pRight) {
+				level[next].push(pNode->m_pRight);
+			}
+			if (pNode->m_pLeft) {
+				level[next].push(pNode->m_pLeft);
+			}
+		}
+		//每完成一次迭代，进行一次交换
+		if (level[current].empty())
+		{
+			printf("\n");
+			current = 1 - current;
+			next = 1 - next;
+		}
+
+	}
+
+
+
+
+
 }
