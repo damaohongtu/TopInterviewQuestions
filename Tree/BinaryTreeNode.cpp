@@ -174,9 +174,42 @@ void printFromTopToBootomZigzag(BinaryTreeNode *pTreeNode) {
 		}
 
 	}
-
-
-
-
-
+}
+bool isSequenceOfBST(int sequence[], int length) {
+	if (sequence==nullptr||length==0) {
+		return false;
+	}
+	int root = sequence[length-1];
+	
+	/*
+	边界：0,1,2,3,...i-1|,i,i+1,...length-2|,length-1
+	以上：i:第一个右子树，length-2:最后一个右子树节点，length-1:root节点
+	长度：左子树：(i-1)-(0)+1=i      右子树：(length-2)-(i)+1=length-1-i
+	*/
+	int i = 0;
+	for (; i < length-1; i++)
+	{
+		if (sequence[i]>root) {
+			break;
+		}
+	}
+	int j = i;
+	for (; j < length-1; j++)
+	{
+		if (sequence[j]<root) {
+			return false;
+		}
+	}
+	//左自树
+	bool left = true;
+	if (i!=0) {
+		isSequenceOfBST(sequence,i);
+	}
+	//右子树
+	if (i<(length-1))
+	{
+		isSequenceOfBST(sequence + i,length-i-1);
+	}
+	bool right = true;
+	return left && right;
 }

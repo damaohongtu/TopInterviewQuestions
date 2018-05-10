@@ -15,3 +15,6 @@ __declspec(dllexport) void DestroyTree(BinaryTreeNode* pRoot);
 __declspec(dllexport) void printFromTopToBottom(BinaryTreeNode* pTreeNode);
 __declspec(dllexport) void printFromTopToBottomByLevel(BinaryTreeNode* pTreeNode);
 __declspec(dllexport) void printFromTopToBootomZigzag(BinaryTreeNode* pTreeNode);
+//判断一个序列是不是BST（二叉搜索树）的后序遍历
+__declspec(dllexport) bool isSequenceOfBST(int sequence[],int length);
+
