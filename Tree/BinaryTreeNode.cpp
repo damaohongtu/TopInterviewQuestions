@@ -175,6 +175,8 @@ void printFromTopToBootomZigzag(BinaryTreeNode *pTreeNode) {
 
 	}
 }
+//判断序列是不是二叉搜索树的后序遍历（二叉树搜索树的中序遍历有序易判断）
+//二叉搜索树的前序遍历类似
 bool isSequenceOfBST(int sequence[], int length) {
 	if (sequence==nullptr||length==0) {
 		return false;
@@ -212,4 +214,31 @@ bool isSequenceOfBST(int sequence[], int length) {
 	}
 	bool right = true;
 	return left && right;
+}
+//通过前序遍历建立二叉排序树
+BinaryTreeNode* createBSTByPreOrder(int sequence[], int length) {
+	if (sequence==nullptr||length==0)
+	{
+		return nullptr;
+	}
+	BinaryTreeNode *pNode =new BinaryTreeNode();;
+	int i = 1;
+	int root = sequence[0];
+	pNode->m_nValue = root;
+	for (; i < length;i++) {
+		if (sequence[i]>root)
+		{
+			break;
+		}
+	}
+	//左子树
+	if (i>1)
+	{
+		pNode->m_pLeft = createBSTByPreOrder(sequence+1,i-1);
+	}
+	//右子树
+	if (i<length) {
+		pNode->m_pRight = createBSTByPreOrder(sequence+i,length-i);
+	}
+	return pNode;
 }
